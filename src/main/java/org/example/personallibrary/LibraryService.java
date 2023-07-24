@@ -29,4 +29,25 @@ public class LibraryService {
     public static void listBook(){
         LibraryDao.listBookDB();
     }
+    public static void deleteBook(){
+        System.out.println("Ingrese el id del libro que quiere eliminar");
+        int idBook = Integer.parseInt(sc.nextLine());
+        LibraryDao.deleteBookDB(idBook);
+    }
+    public static void updatebook(){
+        System.out.println("Indique el nombre a actualizar");
+        String bookName = sc.nextLine();
+        System.out.println("Indique el nombre del author a actualizar");
+        String author = sc.nextLine();
+        System.out.println("Indique el isbn a actualizar");
+        String isnb = sc.nextLine();
+        System.out.println("Indique el id del libro a actualizar");
+        int id = Integer.parseInt(sc.nextLine());
+
+        LibraryModel updatingBook = new LibraryModel();
+        updatingBook.setBookName(bookName);
+        updatingBook.setAuthor(author);
+        updatingBook.setIsbn(isnb);
+        updatingBook.setId_book(id);
+    }
 }

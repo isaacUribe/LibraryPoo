@@ -30,10 +30,44 @@ public interface LibraryDao {
             System.out.println(e);
         }
     }
-    public static void updateBookDB(){
+    public static void updateBookDB(LibraryModel libraryModel){
+        Conexion data = new Conexion();
+        try (Connection connection = data.get_connection()) {
+            PreparedStatement preparedStatement = null;
+            try {
+                String query = "UPDATE boot SET book_name = ?, author = ', isbn = ?, pages = ?, category = ? WHERE id_book = ?";
+                preparedStatement = connection.prepareStatement(query);
+                preparedStatement.setString(1, libraryModel.getBookName());
+                preparedStatement.setString(2, libraryModel.getAuthor());
+                preparedStatement.setString(3, libraryModel.getIsbn());
+                preparedStatement.setInt(4, libraryModel.getPages());
+                preparedStatement.setString(5, libraryModel.getCategory());
+                
+            }catch (SQLException e){
+                System.out.println(e);
+            }
+
+        }catch (SQLException error){
+            System.out.println(error);
+        }
 
     }
-    public static void deleteBookDB(){
+    public static void deleteBookDB(int id_book){
+        Conexion data = new Conexion();
+        try (Connection connection = data.get_connection()) {
+            PreparedStatement preparedStatement = null;
+            try {
+                String query = "DELETE FROM book WHERE book.id_book = ?";
+                preparedStatement = connection.prepareStatement(query);
+                preparedStatement.setInt(1, id_book);
+                preparedStatement.executeUpdate();
+                System.out.println("El registro a sido eliminado exitosamente");
+            }catch (SQLException error){
+                System.out.println(error);
+            }
+        }catch (SQLException e){
+            System.out.println(e);
+        }
 
     }
     public static void listBookDB() {

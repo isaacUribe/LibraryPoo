@@ -27,6 +27,7 @@ public class Menu {
                     break;
                 case 4:
                     System.out.println("Borrar libro");
+                    LibraryService.deleteBook();
                     break;
                 case 5:
                     System.out.println("Saliendo de la aplicacion");
